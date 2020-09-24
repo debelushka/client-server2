@@ -1,0 +1,52 @@
+﻿#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+#include <string.h>
+using namespace std;
+void push();
+void infinity();
+int get_file_size();
+int t = 0;
+double x = 0;
+void print() {
+	char a[80];
+	ifstream file("f2.txt"); 
+	file.getline(a, 80);
+	cout << endl << a << endl;
+	ofstream ofs;
+	ofs.open("f2.txt", std::ofstream::out | std::ofstream::trunc);
+	ofs.close();
+	push();
+}
+void push() {
+	cin >> x;
+	ofstream file("f1.txt", ios::app);
+	file << x;
+	cout << "------------------------------------------------";
+	file.close();
+	infinity();
+}
+
+int get_file_size() {
+	ifstream file("f2.txt", ios::binary | ios::ate);
+	int size = file.tellg();
+	file.close();
+	if (size == -1) return 0;
+	return size;
+
+}
+void infinity() {
+	setlocale(0, " ");
+
+	while (0 == get_file_size()) {
+	}
+	print();
+
+}
+int main()
+{
+	setlocale(0, "");
+	cout << "Выберите одну из двух функций сервера" << endl << "1-Проверить ваш ИМТ" << endl << "2-Проверить число на ряд фибаначи" << endl << "-------------------------------------------------";
+	cout << endl;
+	push();
+}
